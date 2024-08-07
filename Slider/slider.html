@@ -13,19 +13,35 @@
     <style>
         .Slid-1 {
             display: none;
+            height: 80vh;
+
+            animation: fadeInAnimation ease-in-out 0.8s;
+            animation-iteration-count: 1;
+            animation-fill-mode: both;
+
+        }
+
+        @keyframes fadeInAnimation {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
         }
     </style>
 </head>
 
 <body>
-    <div class="position-relative container-fluid d-flex flex-row">
-        <div class="Slid-1 vh-100 bg-black w-100" id="s-1">1</div>
-        <div class="Slid-1 vh-100 bg-danger w-100" id="s-2">2</div>
-        <div class="Slid-1 vh-100 bg-light w-100" id="s-3">3</div>
-        <div onclick="prevSlide()" class="position-absolute z-3 top-50" style="left: 10%;" id="prevBtn"><i
-                class="fa-2xl fa-solid fa-angle-left" style="color: #B197FC;"></i></div>
-        <div onclick="nextSlide()" class="position-absolute z-3 top-50" style="right: 10%;" id="nextBtn"><i
-                class="fa-2xl fa-solid fa-angle-right" style="color: #B197FC;"></i></div>
+    <div class="position-relative d-flex flex-row">
+        <div class="Slid-1 bg-black w-100" id="s-1">1</div>
+        <div class="Slid-1 bg-danger w-100" id="s-2">2</div>
+        <div class="Slid-1 bg-secondary w-100" id="s-3">3</div>
+        <div onclick="prevSlide()" class="position-absolute z-3 top-50" style="left: 10%; cursor: pointer;"
+            id="prevBtn"><i class="fa-2xl fa-solid fa-angle-left" style="color: #B197FC;"></i></div>
+        <div onclick="nextSlide()" class="position-absolute z-3 top-50" style="right: 10%; cursor: pointer;"
+            id="nextBtn"><i class="fa-2xl fa-solid fa-angle-right" style="color: #B197FC;"></i></div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
