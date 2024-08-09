@@ -9,129 +9,160 @@
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 
-<body>
+<body class="bg-danger-subtle vh-100 d-flex justify-content-center align-items-center">
 
-    <Section class="container vh-100">
-        <div class="row py-5 align-items-center justify-content-center">
-            <div class="col-8">
-                <div class="form-floating">
-                    <textarea oninput="textAreaVal();count();" id="sInput" class="form-control"
-                        placeholder="Leave a comment here" style="height: 150px"></textarea>
-                    <label for="sInput">Enter a String</label>
+    <Section class="container py-5">
+        <div class="card shadow-lg">
+            <div class="card-header">
+                <div class="card-title text-center">
+                    <h5>String Functions</h5>
                 </div>
             </div>
-            <div class="col-4">
+            <div class="card-body">
+                <div class="row gap-sm-0 gap-4 align-items-center justify-content-center">
+                    <div class="col-sm-8 col-12">
+                        <div class="form-floating">
+                            <textarea oninput="textAreaVal();count();" id="sInput" class="form-control"
+                                placeholder="Leave a comment here" style="height: 150px"></textarea>
+                            <label for="sInput">Enter a String</label>
+                            <div id="noValue" class="invalid-feedback">
+                                Textarea is empty , Input any String
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-12">
+                        <div class="row gap-lg-0 gap-4">
+                            <div class="col-lg-6 col-12">
+                                <div class="card text-center">
+                                    <div class="card-header">
+                                        <h6 class="card-title">Letter Count</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <p id="letter" class="card-text">0</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-12">
+                                <div class="card text-center">
+                                    <div class="card-header">
+                                        <h6 class="card-title">Word Count</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <p id="wCount" class="card-text">0</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row py-5 justify-content-evenly gap-3">
+                    <div class="col-auto">
+                        <button onclick="upperCase()" class="btn btn-primary">Upper Case</button>
+                    </div>
+                    <div class="col-auto">
+                        <button onclick="lowerCase()" class="btn btn-primary">Lower Case</button>
+                    </div>
+                    <div class="col-auto">
+                        <!-- Button trigger modal -->
+                        <button type="button" onclick="valid(1);" class="btn btn-primary valid" data-bs-target="#">
+                            ReplaceAll
+                        </button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="replaceAll" data-bs-backdrop="static" data-bs-keyboard="false"
+                            tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">ReplaceAll</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="mb-3">
+                                            <label for="strToReplace" class="form-label">String to Replace</label>
+                                            <input type="text" class="form-control" id="strToReplace"
+                                                placeholder="Enter text to replace">
+                                            <div id="RnoValue" class="invalid-feedback">
+
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="replacementStr" class="form-label">Replacement String</label>
+                                            <input type="text" class="form-control" id="replacementStr"
+                                                placeholder="Enter replacement text">
+                                            <div id="RepNoValue" class="invalid-feedback">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Close</button>
+                                        <button type="button" onclick="Replace()"
+                                            class="btn btn-primary">Replace</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <button onclick="valid(0);" type="button" class="btn btn-primary valid" data-bs-target="#">
+                            Slice Text
+                        </button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="sliceText" tabindex="-1" aria-labelledby="exampleModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Slice Text</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="mb-3">
+                                            <label for="startIndex" class="form-label">Start Index</label>
+                                            <input type="number" class="form-control" id="startIndex"
+                                                placeholder="Enter start index">
+                                            <div id="SNoValue1" class="invalid-feedback">
+
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="endIndex" class="form-label">End Index</label>
+                                            <input type="number" class="form-control" id="endIndex"
+                                                placeholder="Enter end index">
+                                            <div id="SNoValue2" class="invalid-feedback">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary"
+                                            onclick="sliceText()">Slice</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="row">
                     <div class="col">
-                        <div class="card text-center">
-                            <div class="card-body">
-                                <h6 class="card-title">Letter Count</h6>
-                                <p id="letter" class="card-text">0</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card text-center">
-                            <div class="card-body">
-                                <h6 class="card-title">Word Count</h6>
-                                <p id="wCount" class="card-text">0</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row py-5 justify-content-evenly">
-            <div class="col-auto">
-                <button onclick="upperCase()" class="btn btn-primary">Upper Case</button>
-            </div>
-            <div class="col-auto">
-                <button onclick="lowerCase()" class="btn btn-warning">Lower Case</button>
-            </div>
-            <div class="col-auto">
-                <!-- Button trigger modal -->
-                <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#replaceAll">
-                    ReplaceAll
-                </button>
-
-                <!-- Modal -->
-                <div class="modal fade" id="replaceAll" tabindex="-1" aria-labelledby="exampleModalLabel"
-                    aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="exampleModalLabel">ReplaceAll</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="mb-3">
-                                    <label for="strToReplace" class="form-label">String to Replace</label>
-                                    <input type="text" class="form-control" id="strToReplace"
-                                        placeholder="Enter text to replace">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="replacementStr" class="form-label">Replacement String</label>
-                                    <input type="text" class="form-control" id="replacementStr"
-                                        placeholder="Enter replacement text">
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button onclick="replace()" type="button" class="btn btn-primary"
-                                    data-bs-dismiss="modal">Replace</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-auto">
-                <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#sliceText">
-                    Slice Text
-                </button>
-
-                <!-- Modal -->
-                <div class="modal fade" id="sliceText" tabindex="-1" aria-labelledby="exampleModalLabel"
-                    aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="exampleModalLabel">Slice Text</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="mb-3">
-                                    <label for="startIndex" class="form-label">Start Index</label>
-                                    <input type="number" class="form-control" id="startIndex"
-                                        placeholder="Enter start index">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="endIndex" class="form-label">End Index</label>
-                                    <input type="number" class="form-control" id="endIndex"
-                                        placeholder="Enter end index">
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
-                                    onclick="sliceText()">Slice</button>
-                            </div>
+                        <div class="form-floating">
+                            <textarea id="sOutput" class="form-control" placeholder="Leave a comment here"
+                                style="height: 200px" disabled></textarea>
+                            <label for="sOutput">Output</label>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="row py-5">
-            <div class="col">
-                <div class="form-floating">
-                    <textarea id="sOutput" class="form-control" placeholder="Leave a comment here" style="height: 150px"
-                        disabled></textarea>
-                    <label for="sOutput">Output</label>
-                </div>
-            </div>
-        </div>
     </Section>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
