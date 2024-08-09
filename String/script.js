@@ -13,8 +13,13 @@ function textAreaVal() {
 }
 
 function count() {
-    lCount.innerText = iTextArea.value.length;
-    wCount.innerText = (iTextArea.value.trim().split(/\s+/)).length;
+    if (iTextArea.value === '') {
+        wCount.innerText  = 0;
+    }
+    else {
+        lCount.innerText = iTextArea.value.length;
+        wCount.innerText = (iTextArea.value.trim().split(/\s+/)).length;
+    }
 }
 
 function upperCase() {
