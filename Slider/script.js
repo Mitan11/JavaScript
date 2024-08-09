@@ -1,18 +1,13 @@
 const divs = document.querySelectorAll('.Slid-1');
 let currentDiv = 0;
 
+divs[currentDiv].style.display = 'flex';
+
 function hideDivs() {
     divs.forEach(div => {
         div.style.display = 'none';
     });
 }
-
-function showDiv(index) {
-    hideDivs();
-    divs[index].style.display = 'flex';
-}
-
-showDiv(currentDiv);
 
 function prevSlide() {
     currentDiv--;
