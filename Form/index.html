@@ -21,16 +21,16 @@
                         <div data-mdb-input-init class="form-outline">
                             <label class="form-label" for="username">Username</label>
                             <input type="text" id="username" class="form-control" placeholder="Enter Username" autofocus
-                                onblur="valid(1)" />
-                            <div class="invalid-feedback text-danger" id="uname"></div>
+                                onblur="valid(this , 'uname')" />
+                            <div class="invalid-feedback text-danger" id="uname">Username Required</div>
                         </div>
                     </div>
                     <div class="col">
                         <div data-mdb-input-init class="form-outline">
                             <label class="form-label" for="email">Email address</label>
                             <input type="email" id="email" class="form-control" placeholder="Enter Email Address"
-                                onblur="valid(2)" />
-                            <div class="invalid-feedback text-danger" id="uemail"></div>
+                                onblur="valid(this , 'uemail')" />
+                            <div class="invalid-feedback text-danger" id="uemail">Email Address Required</div>
                         </div>
                     </div>
                 </div>
@@ -39,16 +39,16 @@
                         <div data-mdb-input-init class="form-outline">
                             <label class="form-label" for="password">Password</label>
                             <input type="password" id="password" class="form-control" placeholder="Enter Password"
-                                onblur="valid(3)" />
-                            <div class="invalid-feedback text-danger" id="pass"></div>
+                                onblur="valid(this , 'pass')" />
+                            <div class="invalid-feedback text-danger" id="pass">Password Required</div>
                         </div>
                     </div>
                     <div class="col">
                         <div data-mdb-input-init class="form-outline">
                             <label class="form-label" for="moblie">Moblie</label>
                             <input type="tel" id="moblie" class="form-control" placeholder="Enter Moblie"
-                                onblur="valid(4)" />
-                            <div class="invalid-feedback text-danger" id="tel"></div>
+                                onblur="valid(this , 'tel')" />
+                            <div class="invalid-feedback text-danger" id="tel">Moblie Number Required</div>
                         </div>
                     </div>
                     <button class="btn btn-primary" type="submit">Submit</button>
