@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Confirmation</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+</head>
+
+<body class="bg-body-secondary">
+
+    <div class="container my-5">
+        <div class="card">
+            <div class="card-header text-center">
+                <h1 class="card-title">Thank You! Booking Confirmed!</h1>
+            </div>
+            <div class="card-body">
+                <p class="card-text text-center">Dear <span id="displayName"></span>, we have received your booking
+                    details as follows:</p>
+                <ul class="list-group">
+                    <li class="list-group-item"><strong>Email:</strong> <span id="displayEmail"></span></li>
+                    <li class="list-group-item"><strong>Phone:</strong> <span id="displayPhone"></span></li>
+                    <li class="list-group-item"><strong>Date:</strong> <span id="displayDate"></span></li>
+                    <li class="list-group-item"><strong>Time:</strong> <span id="displayTime"></span></li>
+                    <li class="list-group-item"><strong>Guests:</strong> <span id="displayGuests"></span></li>
+                    <li class="list-group-item"><strong>Special Requests:</strong> <span
+                            id="displaySpecialRequests"></span></li>
+                </ul>
+
+                <p class="mt-3">We look forward to hosting you and ensuring a memorable experience. </p>
+            </div>
+        </div>
+        <div class="card mt-5 menu-section">
+            <div class="card-header">
+                <h3 class="card-title">Food which will be served as mentioned below</h3>
+            </div>
+            <div class="card-body">
+                <h5>Starters</h5>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item menu-item">Papad Roasted</li>
+                    <li class="list-group-item menu-item">Bataka Pokora</li>
+                    <li class="list-group-item menu-item">Bataka Vada</li>
+                    <li class="list-group-item menu-item">Vegetable Samosa</li>
+                    <li class="list-group-item menu-item">Dhokla</li>
+                    <li class="list-group-item menu-item">Khandvi</li>
+                </ul>
+
+                <h5 class="mt-4">Main Courses</h5>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item menu-item">Fulka Roti</li>
+                    <li class="list-group-item menu-item">Sev Tameta</li>
+                    <li class="list-group-item menu-item">Mix Veg</li>
+                    <li class="list-group-item menu-item">Sambharo</li>
+                    <li class="list-group-item menu-item">Batata</li>
+                    <li class="list-group-item menu-item">Gujarati Kadhi</li>
+                    <li class="list-group-item menu-item">Gulab Jamu</li>
+                    <li class="list-group-item menu-item">Khichdi</li>
+                </ul>
+
+                <h5 class="mt-4">Drinks</h5>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item menu-item">Butter Milk</li>
+                    <li class="list-group-item menu-item">Sparkling Water</li>
+                </ul>
+
+                <h5 class="mt-4">End Course<sup>(1)</sup></h5>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item menu-item">Icecream</li>
+                    <li class="list-group-item menu-item">Pan</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <script>
+        const bookingData = JSON.parse(localStorage.getItem("RegTable"));
+
+        document.getElementById("displayName").innerText = bookingData.Name;
+        document.getElementById("displayEmail").innerText = bookingData.Email;
+        document.getElementById("displayPhone").innerText = bookingData.Phone;
+        document.getElementById("displayDate").innerText = bookingData.Date;
+        document.getElementById("displayTime").innerText = bookingData.Time;
+        document.getElementById("displayGuests").innerText = bookingData.Guests;
+        document.getElementById("displaySpecialRequests").innerText = bookingData.SpecialRequests;
+    </script>
+</body>
+
+</html>
