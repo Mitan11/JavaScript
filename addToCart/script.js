@@ -11,55 +11,37 @@ localStorage.setItem("Product", JSON.stringify(Product));
 
 
 let cardContainer = document.getElementById("card-container");
-
+let card = '';
 for (const key in Product) {
     const product = Product[key];
 
-    let card = `
-    <div class="col-md-4 mb-4" id="${key}">
+    card  += `
+    <div class="col-md-4 mb-4">
         <div class="card">
             <img src="" class="card-img-top" alt="${product.productName}">
             <div class="card-body">
-            <h5 class="card-title">${product.productName}</h5>
-            <p class="card-text">${product.productDescription}</p>
-            <p class="card-text"><strong>Price: ${product.productPrice}</strong></p>
-            <button id="${key}" class="add-product btn btn-primary">Add to Cart</button>
+                <h5 class="card-title">${product.productName}</h5>
+                <p class="card-text">${product.productDescription}</p>
+                <p class="card-text"><strong>Price: ${product.productPrice}</strong></p>
+                <button data-product-id="${key}" class="add-product btn btn-primary">Add to Cart</button>
             </div>
         </div>
     </div>
-    `;
-
-    cardContainer.innerHTML += card;
+`;
 }
+    cardContainer.innerHTML = card;
 
 let add = document.querySelectorAll('.add-product');
 
 add.forEach(element => {
     element.addEventListener('click', (e) => {
-        let product = e.srcElement.id;
-        cartItems.push(product);
-        document.getElementById("pcount").innerText = ++cartTotal;
-        localStorage.setItem("cartItems", JSON.stringify(cartItems));
+        let productId = e.target.dataset.productId;
+        if (!cartItems.includes(productId)) {
+            cartItems.push(productId);
+            document.getElementById("pcount").innerText = ++cartTotal;
+            localStorage.setItem("cartItems", JSON.stringify(cartItems));
+        } else {
+            alert(`${Product[productId].productName} is already in your cart!`);
+        }
     });
 });
-
-
-function addToCart(product) {
-    let cartContainer = document.getElementById("cart-container");
-    let cartCard = `
-    <div class="col-md-4 mb-4" id="${product}">
-        <div class="card">
-            <img src="" class="card-img-top" alt="${Product[product].productName}">
-            <div class="card-body">
-                <h5 class="card-title">${Product[product].productName}</h5>
-                <p class="card-text">${Product[product].productDescription}</p>
-                <p class="card-text"><strong>Price: ${Product[product].productPrice}</strong></p>
-                <button id="${product}" class="add-product btn btn-primary">Add to Cart</button>
-            </div>
-        </div>
-    </div>
-    `
-
-    cartItems.push(cartCard);
-    // cartContainer.innerHTML += cartCard;
-}

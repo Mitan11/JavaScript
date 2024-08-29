@@ -56,7 +56,7 @@
         <div class="mt-5">
             <h2>Cart</h2>
             <div class="row" id="cart-container"></div>
-            <p id="cart-total">Total: $0</p>
+            <p id="cart-total">Total: $</p>
         </div>
 
     </div>
@@ -66,35 +66,36 @@
         crossorigin="anonymous"></script>
 
     <script>
-
+        let cartTotal = 0;
         let cartItem = JSON.parse(localStorage.getItem("cartItems"));
         let Product = JSON.parse(localStorage.getItem("Product"));
+        let c_Total = document.getElementById("cart-total");
+        let cartContainer = document.getElementById("cart-container");
+        let cartCard = '';
 
         cartItem.forEach(key => {
             let product = Product[key];
 
             addToCart(key, product);
         });
-
         function addToCart(key, product) {
-            let cartContainer = document.getElementById("cart-container");
-            let cartCard = `
-        <div class="col-md-4 mb-4" id="${key}">
-            <div class="card">
-                <img src="" class="card-img-top" alt="${product.productName}">
-                <div class="card-body">
-                    <h5 class="card-title">${product.productName}</h5>
-                    <p class="card-text">${product.productDescription}</p>
-                    <p class="card-text"><strong>Price: ${product.productPrice}</strong></p>
-                    <button id="${key}" class="add-product btn btn-primary">Add to Cart</button>
+            cartCard += `
+           <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="" class="card-img-top" alt="${product.productName}">
+                    <div class="card-body">
+                        <h5 class="card-title">${product.productName}</h5>
+                        <p class="card-text">${product.productDescription}</p>
+                        <p class="card-text"><strong>Price: ${product.productPrice}</strong></p>
+                        <button data-product-id="${key}" class="add-product btn btn-primary">Remove</button>
+                    </div>
                 </div>
             </div>
-        </div>
     `;
-
-            cartContainer.innerHTML += cartCard;
+            cartTotal += parseFloat(product.productPrice.replace('$', ''));
         }
-
+        cartContainer.innerHTML = cartCard;
+        c_Total.innerText += cartTotal;
     </script>
 
 </body>
