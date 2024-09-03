@@ -5,6 +5,7 @@ const tMessage = document.getElementById('message');
 const toastLiveExample = document.getElementById('liveToast');
 const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample);
 
+inputTask.focus();
 addTask.addEventListener('click', () => {
     if (inputTask.value === '') {
         emptyField.style.display = 'block';
