@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filter Palindrome</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #eef4ff 0%, #f8fbff 100%);
+            font-family: Arial, Helvetica, sans-serif;
+            color: #1f2937;
+        }
+
+        .card {
+            width: 100%;
+            max-width: 620px;
+            background: #ffffff;
+            border-radius: 18px;
+            box-shadow: 0 14px 32px rgba(15, 23, 42, 0.12);
+            padding: 32px;
+            text-align: center;
+        }
+
+        h1 {
+            margin: 0 0 10px;
+            font-size: 2rem;
+        }
+
+        p {
+            margin: 0 0 24px;
+            color: #6b7280;
+            line-height: 1.6;
+        }
+
+        .form-group {
+            text-align: left;
+            margin-bottom: 16px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #d1d5db;
+            border-radius: 12px;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        input:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+        }
+
+        button {
+            border: none;
+            border-radius: 12px;
+            padding: 12px 20px;
+            font-size: 1rem;
+            font-weight: 700;
+            background: #2563eb;
+            color: #ffffff;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.22);
+        }
+
+        .result-box {
+            margin-top: 24px;
+            padding: 18px;
+            border-radius: 14px;
+            background: #f8fafc;
+            border: 1px solid #e5e7eb;
+            text-align: left;
+            min-height: 96px;
+        }
+
+        .result-box h2 {
+            margin: 0 0 10px;
+            font-size: 1.1rem;
+        }
+
+        .result-text {
+            margin: 0;
+            color: #111827;
+            word-break: break-word;
+            line-height: 1.7;
+        }
+
+        @media (max-width: 520px) {
+            .card {
+                padding: 22px;
+            }
+
+            h1 {
+                font-size: 1.7rem;
+            }
+
+            button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="card">
+        <h1>Filter Palindrome Words</h1>
+        <p>Enter comma-separated words and the page will show only the palindrome words.</p>
+
+        <div class="form-group">
+            <label for="wordInput">Enter Words</label>
+            <input type="text" id="wordInput" placeholder="Example: madam, racecar, apple, level, hello">
+        </div>
+
+        <button type="button" onclick="displayPalindromes()">Filter Palindrome</button>
+
+        <div class="result-box">
+            <h2>Result</h2>
+            <p id="resultText" class="result-text">The filtered palindrome words will appear here.</p>
+        </div>
+    </main>
+
+    <script>
+        // Check whether a word is a palindrome.
+        function isPalindrome(word) {
+            const cleanedWord = word.toLowerCase();
+            const reversedWord = cleanedWord.split('').reverse().join('');
+            return cleanedWord === reversedWord;
+        }
+
+        // Filter and return only palindrome strings from the array.
+        function filterPalindrome(arr) {
+            return arr.filter(function (word) {
+                return isPalindrome(word);
+            });
+        }
+
+        // Read input, validate it, convert to array, and display only palindrome words.
+        function displayPalindromes() {
+            const inputElement = document.getElementById('wordInput');
+            const resultElement = document.getElementById('resultText');
+            const inputValue = inputElement.value.trim();
+
+            if (inputValue === '') {
+                resultElement.textContent = 'Please enter at least one word.';
+                return;
+            }
+
+            const wordsArray = inputValue
+                .split(',')
+                .map(function (word) {
+                    return word.trim();
+                })
+                .filter(function (word) {
+                    return word !== '';
+                });
+
+            if (wordsArray.length === 0) {
+                resultElement.textContent = 'Please enter valid comma-separated words.';
+                return;
+            }
+
+            const palindromeWords = filterPalindrome(wordsArray);
+
+            if (palindromeWords.length === 0) {
+                resultElement.textContent = 'No palindrome words found.';
+                return;
+            }
+
+            resultElement.textContent = JSON.stringify(palindromeWords);
+        }
+    </script>
+</body>
+</html>

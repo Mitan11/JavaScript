@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Odd Numbers Generator</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #eef4ff 0%, #f8fbff 100%);
+            font-family: Arial, Helvetica, sans-serif;
+            color: #1f2937;
+        }
+
+        .card {
+            width: 100%;
+            max-width: 620px;
+            background: #ffffff;
+            border-radius: 18px;
+            box-shadow: 0 14px 32px rgba(15, 23, 42, 0.12);
+            padding: 32px;
+            text-align: center;
+        }
+
+        h1 {
+            margin: 0 0 10px;
+            font-size: 2rem;
+        }
+
+        p {
+            margin: 0 0 24px;
+            color: #6b7280;
+            line-height: 1.6;
+        }
+
+        .form-group {
+            text-align: left;
+            margin-bottom: 16px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #d1d5db;
+            border-radius: 12px;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        input:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+        }
+
+        button {
+            border: none;
+            border-radius: 12px;
+            padding: 12px 20px;
+            font-size: 1rem;
+            font-weight: 700;
+            background: #2563eb;
+            color: #ffffff;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.22);
+        }
+
+        .result-box {
+            margin-top: 24px;
+            padding: 18px;
+            border-radius: 14px;
+            background: #f8fafc;
+            border: 1px solid #e5e7eb;
+            text-align: left;
+            min-height: 96px;
+        }
+
+        .result-box h2 {
+            margin: 0 0 10px;
+            font-size: 1.1rem;
+        }
+
+        .result-text {
+            margin: 0;
+            color: #111827;
+            word-break: break-word;
+            line-height: 1.7;
+        }
+
+        @media (max-width: 520px) {
+            .card {
+                padding: 22px;
+            }
+
+            h1 {
+                font-size: 1.7rem;
+            }
+
+            button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="card">
+        <h1>Generate Odd Numbers</h1>
+        <p>Enter a number and generate the first <strong>n</strong> odd numbers using a loop.</p>
+
+        <div class="form-group">
+            <label for="countInput">Enter n</label>
+            <input type="text" id="countInput" placeholder="Example: 5">
+        </div>
+
+        <button type="button" onclick="displayOddNumbers()">Generate</button>
+
+        <div class="result-box">
+            <h2>Result</h2>
+            <p id="resultText" class="result-text">The generated odd numbers will appear here.</p>
+        </div>
+    </main>
+
+    <script>
+        // Generate the first n odd numbers using a loop.
+        function generateOddNumbers(n) {
+            const oddNumbers = [];
+            let currentNumber = 1;
+
+            for (let index = 0; index < n; index++) {
+                oddNumbers.push(currentNumber);
+                currentNumber += 2;
+            }
+
+            return oddNumbers;
+        }
+
+        // Validate the input and display the generated odd numbers.
+        function displayOddNumbers() {
+            const inputElement = document.getElementById('countInput');
+            const resultElement = document.getElementById('resultText');
+            const inputValue = inputElement.value.trim();
+            const count = Number(inputValue);
+
+            if (inputValue === '' || Number.isNaN(count) || !Number.isInteger(count) || count <= 0) {
+                resultElement.textContent = 'Please enter a valid positive whole number.';
+                return;
+            }
+
+            const oddNumbers = generateOddNumbers(count);
+            resultElement.textContent = oddNumbers.join(' ');
+        }
+    </script>
+</body>
+</html>
