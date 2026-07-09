@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: Arial, Helvetica, sans-serif;
+            background: linear-gradient(135deg, #eef4ff 0%, #f7f9fc 100%);
+            color: #1f2937;
+            padding: 20px;
+        }
+
+        .card {
+            width: 100%;
+            max-width: 560px;
+            background: #ffffff;
+            border-radius: 18px;
+            box-shadow: 0 12px 30px rgba(15, 23, 42, 0.12);
+            padding: 32px;
+            text-align: center;
+        }
+
+        h1 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 2rem;
+        }
+
+        p {
+            margin-top: 0;
+            margin-bottom: 24px;
+            color: #6b7280;
+            line-height: 1.6;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
+            margin-bottom: 22px;
+        }
+
+        .form-group {
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #d1d5db;
+            border-radius: 12px;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        input:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+        }
+
+        .button-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 12px;
+            margin-top: 10px;
+        }
+
+        button {
+            border: none;
+            border-radius: 12px;
+            padding: 12px 18px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            color: #ffffff;
+            background: #2563eb;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.22);
+        }
+
+        .operation-3 {
+            background: #0f766e;
+        }
+
+        .operation-3:hover {
+            background: #115e59;
+        }
+
+        .operation-4 {
+            background: #7c3aed;
+        }
+
+        .operation-4:hover {
+            background: #6d28d9;
+        }
+
+        .operation-5 {
+            background: #d97706;
+        }
+
+        .operation-5:hover {
+            background: #b45309;
+        }
+
+        .result-box {
+            margin-top: 24px;
+            padding: 18px;
+            border-radius: 14px;
+            background: #f8fafc;
+            border: 1px solid #e5e7eb;
+            text-align: left;
+            min-height: 72px;
+        }
+
+        .result-label {
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #334155;
+        }
+
+        .result-text {
+            font-size: 1.1rem;
+            color: #111827;
+            word-break: break-word;
+        }
+
+        @media (max-width: 520px) {
+            .card {
+                padding: 22px;
+            }
+
+            h1 {
+                font-size: 1.7rem;
+            }
+
+            .form-row,
+            .button-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>Calculator</h1>
+        <p>Enter two numbers and use the buttons to perform an operation.</p>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="firstNumber">First Number</label>
+                <input type="text" id="firstNumber" placeholder="Example: 10">
+            </div>
+            <div class="form-group">
+                <label for="secondNumber">Second Number</label>
+                <input type="text" id="secondNumber" placeholder="Example: 5">
+            </div>
+        </div>
+
+        <div class="button-grid">
+            <button type="button" onclick="performOperation('add')">Addition</button>
+            <button type="button" class="operation-3" onclick="performOperation('subtract')">Subtraction</button>
+            <button type="button" class="operation-4" onclick="performOperation('multiply')">Multiplication</button>
+            <button type="button" class="operation-5" onclick="performOperation('divide')">Division</button>
+            <button type="button" style="grid-column: 1 / -1; background:#dc2626;" onclick="performOperation('modulus')">Modulus</button>
+        </div>
+
+        <div class="result-box">
+            <div class="result-label">Result</div>
+            <div id="resultText" class="result-text">Your result will appear here.</div>
+        </div>
+    </div>
+
+    <script>
+        // Read the values from both inputs and validate them.
+        function getNumbers() {
+            const firstValue = document.getElementById('firstNumber').value.trim();
+            const secondValue = document.getElementById('secondNumber').value.trim();
+            const firstNumber = Number(firstValue);
+            const secondNumber = Number(secondValue);
+
+            if (firstValue === '' || secondValue === '' || Number.isNaN(firstNumber) || Number.isNaN(secondNumber)) {
+                document.getElementById('resultText').textContent = 'Please enter valid numbers in both boxes.';
+                return null;
+            }
+
+            return { firstNumber, secondNumber };
+        }
+
+        // Perform the selected mathematical operation and show the output.
+        function performOperation(operation) {
+            const numbers = getNumbers();
+            if (numbers === null) {
+                return;
+            }
+
+            const firstNumber = numbers.firstNumber;
+            const secondNumber = numbers.secondNumber;
+            let resultMessage = '';
+
+            if (operation === 'add') {
+                resultMessage = firstNumber + ' + ' + secondNumber + ' = ' + (firstNumber + secondNumber);
+            } else if (operation === 'subtract') {
+                resultMessage = firstNumber + ' - ' + secondNumber + ' = ' + (firstNumber - secondNumber);
+            } else if (operation === 'multiply') {
+                resultMessage = firstNumber + ' × ' + secondNumber + ' = ' + (firstNumber * secondNumber);
+            } else if (operation === 'divide') {
+                if (secondNumber === 0) {
+                    document.getElementById('resultText').textContent = 'Division by zero is not allowed.';
+                    return;
+                }
+                resultMessage = firstNumber + ' ÷ ' + secondNumber + ' = ' + (firstNumber / secondNumber);
+            } else if (operation === 'modulus') {
+                if (secondNumber === 0) {
+                    document.getElementById('resultText').textContent = 'Modulus by zero is not allowed.';
+                    return;
+                }
+                resultMessage = firstNumber + ' % ' + secondNumber + ' = ' + (firstNumber % secondNumber);
+            }
+
+            document.getElementById('resultText').textContent = resultMessage;
+        }
+    </script>
+</body>
+</html>

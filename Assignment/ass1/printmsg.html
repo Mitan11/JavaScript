@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Print Message</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: Arial, Helvetica, sans-serif;
+            background: linear-gradient(135deg, #eef4ff 0%, #f7f9fc 100%);
+            color: #1f2937;
+            padding: 20px;
+        }
+
+        .card {
+            width: 100%;
+            max-width: 560px;
+            background: #ffffff;
+            border-radius: 18px;
+            box-shadow: 0 12px 30px rgba(15, 23, 42, 0.12);
+            padding: 32px;
+            text-align: center;
+        }
+
+        h1 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 2rem;
+        }
+
+        p {
+            margin-top: 0;
+            margin-bottom: 24px;
+            color: #6b7280;
+            line-height: 1.6;
+        }
+
+        button {
+            border: none;
+            border-radius: 12px;
+            padding: 12px 20px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            color: #ffffff;
+            background: #2563eb;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+            margin-bottom: 22px;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.22);
+        }
+
+        .output-box {
+            text-align: left;
+            background: #f8fafc;
+            border: 1px solid #e5e7eb;
+            border-radius: 14px;
+            padding: 18px;
+            min-height: 260px;
+            white-space: pre-line;
+            line-height: 1.7;
+            color: #111827;
+        }
+
+        @media (max-width: 480px) {
+            .card {
+                padding: 22px;
+            }
+
+            h1 {
+                font-size: 1.7rem;
+            }
+
+            button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>Divisible Number Messages</h1>
+        <p>Click the button to display messages for numbers from 1 to 100.</p>
+
+        <button type="button" onclick="showMessages()">Show Messages</button>
+
+        <div class="output-box" id="outputBox">The output will appear here.</div>
+    </div>
+
+    <script>
+        // Loop from 1 to 100 and print the correct message for each number.
+        function showMessages() {
+            let outputText = '';
+
+            for (let number = 1; number <= 100; number++) {
+                if (number % 3 === 0 && number % 5 === 0) {
+                    outputText += number + ': Number is divisible by 3 and 5 both\n';
+                } else if (number % 3 === 0) {
+                    outputText += number + ': Number is divisible by 3\n';
+                } else if (number % 5 === 0) {
+                    outputText += number + ': Number is divisible by 5\n';
+                }
+            }
+
+            document.getElementById('outputBox').textContent = outputText;
+        }
+    </script>
+</body>
+</html>

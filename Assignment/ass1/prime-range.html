@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prime Range Check</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: Arial, Helvetica, sans-serif;
+            background: linear-gradient(135deg, #eef4ff 0%, #f7f9fc 100%);
+            color: #1f2937;
+            padding: 20px;
+        }
+
+        .card {
+            width: 100%;
+            max-width: 560px;
+            background: #ffffff;
+            border-radius: 18px;
+            box-shadow: 0 12px 30px rgba(15, 23, 42, 0.12);
+            padding: 32px;
+            text-align: center;
+        }
+
+        h1 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 2rem;
+        }
+
+        p {
+            margin-top: 0;
+            margin-bottom: 24px;
+            color: #6b7280;
+            line-height: 1.6;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
+            margin-bottom: 22px;
+        }
+
+        .form-group {
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #d1d5db;
+            border-radius: 12px;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        input:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+        }
+
+        button {
+            border: none;
+            border-radius: 12px;
+            padding: 12px 20px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            color: #ffffff;
+            background: #2563eb;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+            margin-top: 6px;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.22);
+        }
+
+        .result-box {
+            margin-top: 24px;
+            padding: 18px;
+            border-radius: 14px;
+            background: #f8fafc;
+            border: 1px solid #e5e7eb;
+            text-align: left;
+            min-height: 72px;
+        }
+
+        .result-box p {
+            margin: 0;
+            color: #111827;
+            font-size: 1.05rem;
+        }
+
+        @media (max-width: 520px) {
+            .card {
+                padding: 22px;
+            }
+
+            h1 {
+                font-size: 1.7rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>Prime Range Checker</h1>
+        <p>Enter two numbers and check whether at least one prime number exists between them.</p>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="firstNumber">First Number</label>
+                <input type="text" id="firstNumber" placeholder="Example: 10">
+            </div>
+            <div class="form-group">
+                <label for="secondNumber">Second Number</label>
+                <input type="text" id="secondNumber" placeholder="Example: 15">
+            </div>
+        </div>
+
+        <button type="button" onclick="checkPrimeRange()">Check Range</button>
+
+        <div class="result-box" id="resultBox">
+            <p>The result will appear here.</p>
+        </div>
+    </div>
+
+    <script>
+        // Check whether a number is prime.
+        function isPrime(number) {
+            if (number < 2) {
+                return false;
+            }
+
+            for (let divisor = 2; divisor <= Math.sqrt(number); divisor++) {
+                if (number % divisor === 0) {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        // Return true if at least one prime number exists between the two values.
+        function hasPrime(n1, n2) {
+            const start = Math.min(n1, n2);
+            const end = Math.max(n1, n2);
+
+            for (let number = start; number <= end; number++) {
+                if (isPrime(number)) {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        // Read the inputs, validate them, and display the return value.
+        function checkPrimeRange() {
+            const firstValue = document.getElementById('firstNumber').value.trim();
+            const secondValue = document.getElementById('secondNumber').value.trim();
+            const firstNumber = Number(firstValue);
+            const secondNumber = Number(secondValue);
+            const resultBox = document.getElementById('resultBox');
+
+            if (firstValue === '' || secondValue === '' || Number.isNaN(firstNumber) || Number.isNaN(secondNumber)) {
+                resultBox.innerHTML = '<p>Please enter valid numbers in both boxes.</p>';
+                return;
+            }
+
+            const result = hasPrime(firstNumber, secondNumber);
+            resultBox.innerHTML = '<p><strong>' + result + '</strong></p>';
+        }
+    </script>
+</body>
+</html>
